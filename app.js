@@ -5,6 +5,7 @@ import { PORT } from "./config/env.js";
 import authRouter from "./routes/auth.routes.js";
 import userRouter from "./routes/user.routes.js";
 import subscriptionRouter from "./routes/subscription.routes.js";
+import conncectToDatabase from "./database/mongodb.js";
 
 const app = express();
 
@@ -18,8 +19,9 @@ app.get("/", (req, res) => {
   res.send("Velkommen til subscription service !");
 });
 
-app.listen(PORT, () => {
-  console.log(`sub tracker running on http://localhost:${PORT}`);
+app.listen(PORT, async () => {
+  console.log(`Sub tracker running on http://localhost:${PORT}`);
+  await conncectToDatabase();
 });
 
 export default app;
