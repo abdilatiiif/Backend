@@ -9,12 +9,15 @@ import conncectToDatabase from "./database/mongodb.js";
 import errorMiddleware from "./middlewares/error.middleware.js";
 import cookieParser from "cookie-parser";
 
+import arcjetMiddleware from "./middlewares/arcjet.middleware.js";
+
 const app = express();
 
 // expres middleware
 app.use(express.json()); // allow to parse json request body
 app.use(express.urlencoded({ extended: false })); // helps to prosess form data
 app.use(cookieParser()); // remember to import it - reads cookies and makes them available in req.cookies
+app.use(arcjetMiddleware);
 
 console.log("App is starting...");
 
