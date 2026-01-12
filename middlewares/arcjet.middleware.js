@@ -7,7 +7,7 @@ export default async function arcjetMiddleware(req, res, next) {
     if (decision.isDenied()) {
       if (decision.reason.isRateLimit())
         return res.status(429).json({ message: "Too many requests" });
-      if (decision.isBot())
+      if (decision.reason.isBot())
         return res.status(403).json({ message: "Bot detected" });
 
       return res.status(403).json({ message: "access denied" });

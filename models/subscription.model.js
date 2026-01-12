@@ -83,7 +83,7 @@ const subscriptionSchema = new mongoose.Schema(
 );
 
 // auto calculate renewalDate before saving, and if missing
-subscriptionSchema.pre("save", function (next) {
+subscriptionSchema.pre("save", function () {
   if (!this.renewalDate) {
     const renewalPeriods = {
       daily: 1,
@@ -101,9 +101,6 @@ subscriptionSchema.pre("save", function (next) {
   if (this.renewalDate < new Date()) {
     this.status = "expired";
   }
-
-  //proceed to save document in database
-  next();
 });
 
 const Subscription = mongoose.model("Subscription", subscriptionSchema); // Models start with uppercase letter
